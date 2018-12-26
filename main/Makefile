@@ -1,10 +1,10 @@
 all: main
 
 clean:
-	rm -rf *.a *.h main
+	rm -rf *.a *.h main *.so
 
-sdlgotest.a:
-	go build -buildmode=c-archive -o sdlgotest.a main.go
+sdlgotest.so:
+	go build -buildmode=c-shared -o sdlgotest.so main.go
 
-main: sdlgotest.a
-	gcc main.c sdlgotest.a -o main -lpthread
+main: sdlgotest.so
+	gcc main.c ./sdlgotest.so -o main
